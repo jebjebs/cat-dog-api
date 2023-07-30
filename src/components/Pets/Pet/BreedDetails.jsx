@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 const BreedDetails = () => {
-  const [breed, setBreed] = useState({})
+  // const [breed, setBreed] = useState({})
+  const { state } = useLocation();
+  const breed = state;
+  // const { id } = useParams();
+  console.log(state);
+  // const fetchBreedDetails = async (id) => {
+  //   const response = await fetch(
+  //     `https://api.thecatapi.com/v1/breeds/${id}`
+  //   );
+  //   const data = await response.json();
+  //   setBreed(data);
+  // }
 
-  const { id } = useParams();
-
-  const fetchBreedDetails = async (id) => {
-    const response = await fetch(
-      `https://api.thecatapi.com/v1/breeds/${id}`
-      );
-    const data = await response.json();
-    setBreed(data);
-  }
-
-  useEffect(() => {
-    fetchBreedDetails(id);
-  }, [])
+  // useEffect(() => {
+  //   fetchBreedDetails(id);
+  // }, [])
   
   
 
@@ -27,11 +28,12 @@ const BreedDetails = () => {
   //   const data = await response.json();
   //   console.log(data);
   // }
-
   return (
     <>
-    <h1>BreedDetails</h1>
-    <p>{breed.origin}</p>
+    <h1>{breed.name}</h1>
+    <h3>{breed.origin}</h3>
+    <h5>{breed.temperament}</h5>
+    <p>{breed.description}</p>
     </>
 
   )

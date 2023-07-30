@@ -4,45 +4,34 @@ import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Table
 
 const Pets = ({ onShowBreedDetails }) => {
   const [pets, setPets] = useState([]) //state for all pet breeds
-  const [pet, setPet] = useState("")
+  const [pet, setPet] = useState({})
   const [page, setPage] = useState(0) //for displaying specific page list for breeds
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
   const fetchPets = async () => {
-    const response = await fetch(
-      "https://api.thecatapi.com/v1/breeds"
-    )
-    const data = await response.json();
-    setPets(data);
+    try {
+      const catResponse = await fetch(
+        "https://api.thecatapi.com/v1/breeds"
+      )
+      const dogResponse = await fetch(
+        "https://api.thedogapi.com/v1/breeds"
+      )
+      const catData = await catResponse.json();
+      const dogData = await dogResponse.json();
+      
+      const cats = catData.map((cat) => ({...cat, isCat:true}))
+      const dogs = dogData.map((dog) => ({...dog, isCat:false}))
+      setPets([...cats, ...dogs]);
+
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
     fetchPets();
   }, [])
-
-  
-  const fetchBreed = async (breedId) => {
-    const response = await fetch(
-      `https://api.thecatapi.com/v1/breeds/${breedId}`
-    );
-    const data = await response.json();
-    setPet(data);
-  }
-
-  const fetchBreedImages = async (breedId) => {
-    const response = await fetch(
-      `https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=${breedId}`
-    );
-    const data = await response.json();
-    console.log(data);
-  }
-  
-  const handleShowBreedDetails = (petId) => {
-    // fetch specific breed details
-    fetchBreed(petId);
-    // fetch images for specific breed
-    fetchBreedImages(petId);
-  }
 
   // Functions for table pagination
   const handleChangePage = (event, newPage) => {
@@ -73,7 +62,7 @@ const Pets = ({ onShowBreedDetails }) => {
               .slice(rowsPerPage * page, rowsPerPage * page + rowsPerPage)
               .map((pet) => (
                 <TableRow key={pet.id}>
-                  <Pet pet={pet} onShowBreedDetails={handleShowBreedDetails}></Pet>
+                  <Pet pet={pet}></Pet>
                 </TableRow>
             ))}
           </TableBody>

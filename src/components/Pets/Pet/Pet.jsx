@@ -8,10 +8,10 @@ const Pet = ({ pet }) => {
   return (
     <>
       <TableCell>{pet.name}</TableCell>
-      <TableCell>Cat</TableCell>
+      <TableCell>{pet.isCat ? "Cat" : "Dog"}</TableCell>
       <TableCell>{pet.origin}</TableCell>
       <TableCell>
-        <Button><Link to={`/breeds/${pet.id}`}>View</Link></Button>
+        <Button><Link to={`/breeds/${pet.id}`} state={pet}>View</Link></Button>
       </TableCell>
     </>
   )
