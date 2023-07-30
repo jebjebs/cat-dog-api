@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import Pets from "./components/Pets/Pets";
+import { Route, Routes, Link } from "react-router-dom";
+import Home from "./components/Home";
 
 function App() {
-  
-
   return (
-    <div className="App">
-      <h1>The Cat Dog Project</h1>
-      <Pets></Pets>
-    </div>
-  );
+    <>
+      <h1><Link to="/">The Cat Dog Project</Link></h1>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route />
+      </Routes>
+    </>
+  )
 }
 
 export default App;
