@@ -1,15 +1,18 @@
 import React from "react";
 import { Button, TableCell } from '@mui/material';
+import { Link } from "react-router-dom";
 
-const Pet = ({ pet, onShowBreedDetails }) => {
-  // fetch /breed/:breed_id here
+
+const Pet = ({ pet }) => {
+
   return (
-    // <Button variant="contained" onClick={() => onShowBreedDetails(pet.id)}>{ pet.name }</Button>
     <>
       <TableCell>{pet.name}</TableCell>
       <TableCell>Cat</TableCell>
       <TableCell>{pet.origin}</TableCell>
-      <TableCell><Button>View</Button></TableCell>
+      <TableCell>
+        <Button><Link to={`/breeds/${pet.id}`}>View</Link></Button>
+      </TableCell>
     </>
   )
 }
