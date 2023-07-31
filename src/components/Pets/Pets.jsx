@@ -21,7 +21,9 @@ const Pets = ({ onShowBreedDetails }) => {
       
       const cats = catData.map((cat) => ({...cat, isCat:true}))
       const dogs = dogData.map((dog) => ({...dog, isCat:false}))
-      setPets([...cats, ...dogs]);
+      
+      // sort all pets by breed name (A-Z)
+      setPets([...cats, ...dogs].sort((a, b) => a.name > b.name ? 1 : -1));
 
 
     } catch (error) {
@@ -33,6 +35,7 @@ const Pets = ({ onShowBreedDetails }) => {
     fetchPets();
   }, [])
 
+  
   // Functions for table pagination
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
