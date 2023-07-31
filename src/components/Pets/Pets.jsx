@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Pet from "./Pet/Pet";
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, TablePagination, Paper } from "@mui/material";
+import { Box, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, TablePagination, Paper, Typography } from "@mui/material";
 
 const Pets = ({ onShowBreedDetails }) => {
   const [pets, setPets] = useState([]) //state for all pet breeds
@@ -35,7 +35,7 @@ const Pets = ({ onShowBreedDetails }) => {
     fetchPets();
   }, [])
 
-  
+
   // Functions for table pagination
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -49,8 +49,8 @@ const Pets = ({ onShowBreedDetails }) => {
 
 
   return (
-    <>
-      <TableContainer component={Paper}>
+    <Box my={3} mx={2}>
+      <TableContainer mt="3" component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
@@ -80,7 +80,7 @@ const Pets = ({ onShowBreedDetails }) => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </TableContainer>
-    </>
+    </Box>
   )
 }
 

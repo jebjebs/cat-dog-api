@@ -11,7 +11,7 @@ const Pet = ({ pet }) => {
       <TableCell>{pet.isCat ? "Cat" : "Dog"}</TableCell>
       <TableCell>{pet.origin}</TableCell>
       <TableCell>
-        <Button><Link to={`/breeds/${pet.id}`} state={pet}>View</Link></Button>
+        <Button><Link to={`/breeds/${pet.id}`} state={pet} style={{textDecoration:'none'}}>View</Link></Button>
       </TableCell>
     </>
   )
